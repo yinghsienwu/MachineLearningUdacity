@@ -65,7 +65,7 @@ def EvalNetwork(inputValues, Network):
             NewOut.append(layer[i].activate(out))
         out=NewOut  #update current input 
             
-    OutputValue=out[0]
+    OutputValue=out
     # Be sure your output value is a single number
     return OutputValue
 
