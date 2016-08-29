@@ -284,7 +284,7 @@ div#notebook {
 <span class="n">n_students</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="p">)</span>
 
 <span class="c1"># TODO: Calculate number of features</span>
-<span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
 
 <span class="c1"># TODO: Calculate passing students</span>
 <span class="n">n_passed</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="p">[</span><span class="n">student_data</span><span class="p">[</span><span class="s1">&#39;passed&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;yes&#39;</span><span class="p">])</span>
@@ -314,7 +314,7 @@ div#notebook {
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Total number of students: 395
-Number of features: 31
+Number of features: 30
 Number of students who passed: 265
 Number of students who failed: 130
 Graduation rate of the class: 67.09%
@@ -422,7 +422,7 @@ Feature values:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">preprocess_features</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
@@ -525,7 +525,7 @@ Feature values:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import any additional functionality you may need here</span>
@@ -619,7 +619,7 @@ Testing set has 95 samples.
 <p><strong>Application</strong>: An example of a typical computer vision computation pipeline for face recognition using KNN including feature extraction and dimension reduction pre-processing steps (usually implemented with OpenCV) <a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm">reference</a>. 
   <strong>Strengths</strong>: KNN is simple and requires no assumptions as to the form of the model, few assumptions about features. There is only one parameter estimated (k). It performs well where there is a large training dataset, or many combinations of predictor variables.
   <strong>Weakness</strong>: It provides no information on which predictors are most effective in making a good classification. It requires long computational time. Number of data points requred increases faster than linearity. It is very sensitive to bad features and outliers. 
-  <strong>KNN was chosen for this problem as a benchmark.</strong></p>
+  <strong>KNN was chosen for this problem because we have many features and reasonable size of training dataset. Hence, KNN might perform well here. </strong></p>
 </li>
 </ul>
 <ul>
@@ -627,7 +627,7 @@ Testing set has 95 samples.
 <p><strong>Application</strong>: Logistic Regression has been widely used in economy, marketing and finance. For example, it does a good job in forcasting the direction and strength of stock market movement <a href="http://cs229.stanford.edu/proj2013/ChenChenYe-ForecastingTheDirectionAndStrengthOfStockMarketMovement.pdf">reference</a>.
   <strong>Strengths</strong>: Logistic regression is simple, it has low variance and so is less prone to overfitting than decision tree. 
   <strong>Weakness</strong>: A facility with concept of odds is often necessary. If there is a large number of predictor values, then it is often necessary to reduce them to most important through pre-processing, inferential statistics, bestsubset selection. 
-  <strong>Logistic Regression was chosen because it is good to know the contribution of individual predictors.</strong></p>
+  <strong>Logistic Regression was chosen because we have many features (mostly categorical) in this binary classification problem. In addition to KNN, Logistic Regression can provide information on the contribution of individual predictors.</strong></p>
 </li>
 </ul>
 <ul>
@@ -661,7 +661,7 @@ Testing set has 95 samples.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">train_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
@@ -734,7 +734,7 @@ Testing set has 95 samples.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import the three supervised learning models from sklearn</span>
@@ -792,74 +792,74 @@ Testing set has 95 samples.
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Training a KNeighborsClassifier using a training set size of 100. . .
-Trained model in 0.0012 seconds
-Made predictions in 0.0022 seconds.
+Trained model in 0.0066 seconds
+Made predictions in 0.0033 seconds.
 F1 score for training set: 0.8082.
-Made predictions in 0.0020 seconds.
+Made predictions in 0.0017 seconds.
 F1 score for test set: 0.7413.
 
 
 Training a KNeighborsClassifier using a training set size of 200. . .
-Trained model in 0.0010 seconds
-Made predictions in 0.0047 seconds.
+Trained model in 0.0009 seconds
+Made predictions in 0.0056 seconds.
 F1 score for training set: 0.8456.
-Made predictions in 0.0032 seconds.
+Made predictions in 0.0035 seconds.
 F1 score for test set: 0.7972.
 
 
 Training a KNeighborsClassifier using a training set size of 300. . .
-Trained model in 0.0024 seconds
-Made predictions in 0.0070 seconds.
+Trained model in 0.0016 seconds
+Made predictions in 0.0109 seconds.
 F1 score for training set: 0.8500.
-Made predictions in 0.0018 seconds.
+Made predictions in 0.0079 seconds.
 F1 score for test set: 0.7943.
 
 
 Training a LogisticRegression using a training set size of 100. . .
-Trained model in 0.0015 seconds
-Made predictions in 0.0003 seconds.
+Trained model in 0.1277 seconds
+Made predictions in 0.0127 seconds.
 F1 score for training set: 0.8806.
-Made predictions in 0.0003 seconds.
+Made predictions in 0.0005 seconds.
 F1 score for test set: 0.7121.
 
 
 Training a LogisticRegression using a training set size of 200. . .
-Trained model in 0.0023 seconds
-Made predictions in 0.0005 seconds.
+Trained model in 0.0035 seconds
+Made predictions in 0.0003 seconds.
 F1 score for training set: 0.8601.
-Made predictions in 0.0004 seconds.
+Made predictions in 0.0005 seconds.
 F1 score for test set: 0.7299.
 
 
 Training a LogisticRegression using a training set size of 300. . .
-Trained model in 0.0021 seconds
-Made predictions in 0.0002 seconds.
+Trained model in 0.0151 seconds
+Made predictions in 0.0006 seconds.
 F1 score for training set: 0.8322.
-Made predictions in 0.0001 seconds.
+Made predictions in 0.0061 seconds.
 F1 score for test set: 0.7571.
 
 
 Training a SVC using a training set size of 100. . .
-Trained model in 0.0010 seconds
-Made predictions in 0.0006 seconds.
+Trained model in 0.0354 seconds
+Made predictions in 0.0019 seconds.
 F1 score for training set: 0.8591.
-Made predictions in 0.0006 seconds.
+Made predictions in 0.0024 seconds.
 F1 score for test set: 0.7974.
 
 
 Training a SVC using a training set size of 200. . .
-Trained model in 0.0029 seconds
-Made predictions in 0.0030 seconds.
+Trained model in 0.0468 seconds
+Made predictions in 0.0078 seconds.
 F1 score for training set: 0.8874.
-Made predictions in 0.0016 seconds.
+Made predictions in 0.0039 seconds.
 F1 score for test set: 0.8026.
 
 
 Training a SVC using a training set size of 300. . .
-Trained model in 0.0076 seconds
-Made predictions in 0.0064 seconds.
+Trained model in 0.0207 seconds
+Made predictions in 0.0082 seconds.
 F1 score for training set: 0.8658.
-Made predictions in 0.0014 seconds.
+Made predictions in 0.0040 seconds.
 F1 score for test set: 0.8289.
 
 
@@ -1038,7 +1038,15 @@ SVM has slightly slow training time which scales up with training set size. Howe
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: Support Vector Machines algorithm determines a decision boundary based on given values of features and separates data points with different labels. Given labeled training sets, the decision boundary is calculated to maximize the distance between the decision boundary to the nearest data points. Then we can use the SVM model to predict the labels of the test sets based on their features' values. SVMs can be a linear classifier or can be converted into nonlinear classifier (with curvy decision boundary) by tweeking kernels for more complex, nonlinearly separable datasets. </strong></p>
+<p><strong>Answer:</strong>
+Support Vector Machines (SVM) algorithm  separates these students into two groups, pass or fail, based on given values of students' characteristics (studytime, absences, etc). Although there are many characteristics, let us use studytime and absences to explain how does SVM work.</p>
+<ul>
+<li>First, we can plot each student as a data point on a figure of students' studytime versus absences, and red points or blue points represent passed or failed students, respectively. Intuitively, I assume failed students might spend fewer time on studying and be absent for more days than passed students. </li>
+<li>Then, in this figure, most red points (failed) might aggregate in the top left corner (low studytime and high absence) in the figure, and most blue points (passed) might aggregate in the bottom right corner (high studytime and low absence) in the figure. </li>
+<li>During training, we can draw a line from the top right to the bottom left in the figure to separate the two groups of students. At the right side, students are likely to pass, at the left side, students are likely to fail. However, we can draw as many lines as possible to separate these students. Based on SVM, the best line to separate the students should maximize the distance from the line to the most ambiguous student with intermediate levels of absences and studytime (the nearest data points). </li>
+<li>During testing, if we know the studytime and absences for another group of students, we can plot their data on the figure and predict whether they are likely to fail (left side) or pass (right side). </li>
+<li>This is a simple example with only two characteristics considered. But we can easily implement SVM to more characteristics for our predictions. </li>
+</ul>
 
 </div>
 </div>
@@ -1069,7 +1077,7 @@ SVM has slightly slow training time which scales up with training set size. Howe
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;GridSearchCV&#39; and &#39;make_scorer&#39;</span>
@@ -1116,9 +1124,9 @@ SVM has slightly slow training time which scales up with training set size. Howe
   decision_function_shape=None, degree=3, gamma=0.0001, kernel=&apos;rbf&apos;,
   max_iter=-1, probability=False, random_state=3, shrinking=True,
   tol=0.001, verbose=False)
-Made predictions in 0.0047 seconds.
+Made predictions in 0.0050 seconds.
 Tuned model has a training F1 score of 0.8203.
-Made predictions in 0.0015 seconds.
+Made predictions in 0.0018 seconds.
 Tuned model has a testing F1 score of 0.8344.
 </pre>
 </div>
