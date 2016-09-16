@@ -12,7 +12,7 @@ class LearningAgent(Agent):
         self.planner = RoutePlanner(self.env, self)  # simple route planner to get next_waypoint
         # TODO: Initialize any additional variables here
         self.next_waypoint=None
-        #self.total_reward=0
+        self.total_reward=0
 
     def reset(self, destination=None):
         self.planner.route_to(destination)
