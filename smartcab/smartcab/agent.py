@@ -31,7 +31,7 @@ class LearningAgent(Agent):
 
         # TODO: Select action according to your policy
         action =random.choice(Environment.valid_actions)
-        '''# update rule
+        # update rule
         if self.next_waypoint=='right':
             if inputs['light']=='red' and inputs['left']=='forward':
                 gogo=False
@@ -44,7 +44,7 @@ class LearningAgent(Agent):
                 
         if not gogo:
             action=None
-        '''
+        
         # Execute action and get reward
         reward = self.env.act(self, action)
         self.total_reward+=reward
