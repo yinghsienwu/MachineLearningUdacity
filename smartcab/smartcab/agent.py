@@ -32,6 +32,7 @@ class LearningAgent(Agent):
         # TODO: Select action according to your policy
         action =random.choice(Environment.valid_actions)
         # update rule
+        
         if self.next_waypoint=='right':
             if inputs['light']=='red' and inputs['left']=='forward':
                 gogo=False
@@ -60,7 +61,7 @@ def run():
     # Set up environment and agent
     e = Environment()  # create environment (also adds some dummy traffic)
     a = e.create_agent(LearningAgent)  # create agent
-    e.set_primary_agent(a, enforce_deadline=True)  # specify agent to track
+    e.set_primary_agent(a, enforce_deadline=False)  # specify agent to track
     # NOTE: You can set enforce_deadline=False while debugging to allow longer trials
 
     # Now simulate it
