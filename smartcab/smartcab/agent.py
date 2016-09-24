@@ -1,5 +1,4 @@
 import random
-import numpy as np
 from environment import Agent, Environment
 from planner import RoutePlanner
 from simulator import Simulator
@@ -12,20 +11,15 @@ class LearningAgent(Agent):
         self.color = 'red'  # override color
         self.planner = RoutePlanner(self.env, self)  # simple route planner to get next_waypoint
         # TODO: Initialize any additional variables here
-        #self.next_waypoint=None
-        self.actions=[None, 'forward','left','right']
-        self.learning_rate=0.3
-        self.state=None
-        self.trips=0
-        self.q={}
-        
+        self.last_action=None
+        self.last_reward=0
 
     def reset(self, destination=None):
         self.planner.route_to(destination)
         # TODO: Prepare for a new trip; reset any variables here, if required
-        self.trips+=1
-        if self.trips>=100:
-            self.learning_rate=0
+        self.last_action=None
+        self.last_reward=0
+        self.sate=None
 
     def update(self, t):
         # Gather inputs
@@ -33,34 +27,46 @@ class LearningAgent(Agent):
         inputs = self.env.sense(self)
         deadline = self.env.get_deadline(self)
 
-        # TODO: Update state
-        state = (inputs['light'],inputs['oncoming'],inputs['right'],inputs['left'],self.next_waypoint)
-        self.state=state
+        # TODO: Update state  ## two states: 'Random' and 'Initiated'
+        if self.state==None:
+            self.state='Random'
+
+        current_env_state=self.env.sense(self)
+        
+        possible_actions=[]
+        if current_env_state['light']=='red':
+            if current_env_state['oncoming']!='left':
+                possible_actions=['right',None]
+        else: ## green
+            if current_env_state['oncoming']=='forward':
+                possible_actions=['forward','right']
+            else:
+                possible_actions=['right','forward','left'] ## don't stop at intersections
 
         # TODO: Select action according to your policy
-        
-        # update rule
-
-
-        # Lazy initialization of Q-values
-        for action in self.actions:
-            if (state,action) not in self.q:
-                self.q[(state,action)]=1
-        # Select action according to the policy
-        prob=[self.q[(state,None)],self.q[(state,'forward')],self.q[(state,'left')],self.q[(state,'right')]]
-        # Use the softmax function 
-        prob=np.exp(prob)/np.sum(np.exp(prob),axis=0)
-        if random.random()< max((100-self.trips)/100,0):
-            action=np.random.choice(self.actions,p=prob)
-        else:
-            action=self.actions[np.argmax(prob)]
+        action = None
+        if possible_actions !=[] and self.state=='Random':
+            ## pick a random legal action from possible actions
+            action_index=random.randint(0,len(possible_actions)-1)
+            action=possible_actions[action_index]
+        elif possible_actions!=[] and self.state=='Initiated':
+            action=self.last_action
 
         # Execute action and get reward
         reward = self.env.act(self, action)
 
         # TODO: Learn policy based on state, action, reward
-        self.q[(state,action)]=self.learning_rate*reward+(1-self.learning_rate)*self.q[(state,action)]
-       # print "LearningAgent.update(): deadline = {}, inputs = {}, action = {}, reward = {}".format(deadline, inputs, action, reward)  # [debug]
+        if action!=None:
+            if reward>self.last_reward:
+                self.state='Initiated'
+                self.last_action=action
+                self.last_reward=reward
+            else:
+                self.state='Random'
+                self.last_action=action
+                self.last_reward=reward
+
+        print "LearningAgent.update(): deadline = {}, inputs = {}, action = {}, reward = {}".format(deadline, inputs, action, reward)  # [debug]
 
 
 def run():
@@ -73,7 +79,7 @@ def run():
     # NOTE: You can set enforce_deadline=False while debugging to allow longer trials
 
     # Now simulate it
-    sim = Simulator(e, update_delay=0.2, display=True)  # create simulator (uses pygame when display=True, if available)
+    sim = Simulator(e, update_delay=0.5, display=True)  # create simulator (uses pygame when display=True, if available)
     # NOTE: To speed up simulation, reduce update_delay and/or set display=False
 
     sim.run(n_trials=100)  # run for a specified number of trials
