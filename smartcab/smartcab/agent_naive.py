@@ -12,26 +12,16 @@ class LearningAgent(Agent):
         self.planner = RoutePlanner(self.env, self)  # simple route planner to get next_waypoint
         # TODO: Initialize any additional variables here
         self.last_action=None
-        ###self.last_reward=0
-        ### Initialize q matrix
-        self.q={}
-        self.alpha=1.    ###optimal learning rate
-        self.epsilon=0.  ###initial stoschasticity
-        self.gamma=0.2   ###discount factor: too high, may diverge
-        self.last_state=None
-        self.state=None
-        self.last_reward=None
-        self.total_rewards=0
+        self.last_reward=0
+        
 
     def reset(self, destination=None):
         self.planner.route_to(destination)
         # TODO: Prepare for a new trip; reset any variables here, if required
         self.last_action=None
-        ###self.last_reward=0
+        self.last_reward=0
         self.state=None
-        ###q-learning
-        self.epsilon=0.
-        self.total_rewards=0
+        
 
     def update(self, t):
         # Gather inputs
