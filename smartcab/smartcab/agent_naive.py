@@ -6,14 +6,14 @@ from simulator import Simulator
 class LearningAgent(Agent):
     """An agent that learns to drive in the smartcab world."""
 
-     def __init__(self, env):
+    def __init__(self, env):
         super(LearningAgent, self).__init__(env)  # sets self.env = env, state = None, next_waypoint = None, and a default color
         self.color = 'red'  # override color
         self.planner = RoutePlanner(self.env, self)  # simple route planner to get next_waypoint
         # TODO: Initialize any additional variables here
         self.last_action=None
         self.last_reward=0
-        
+        self.total_rewards=0
 
     def reset(self, destination=None):
         self.planner.route_to(destination)
@@ -21,7 +21,7 @@ class LearningAgent(Agent):
         self.last_action=None
         self.last_reward=0
         self.state=None
-        
+        self.total_rewards=0
 
     def update(self, t):
         # Gather inputs
@@ -56,6 +56,7 @@ class LearningAgent(Agent):
 
         # Execute action and get reward
         reward = self.env.act(self, action)
+        self.total_rewards+=reward
 
         # TODO: Learn policy based on state, action, reward
         if action!=None:
@@ -68,7 +69,7 @@ class LearningAgent(Agent):
                 self.last_action=action
                 self.last_reward=reward
 
-        print "LearningAgent.update(): deadline = {}, inputs = {}, action = {}, reward = {}".format(deadline, inputs, action, reward)  # [debug]
+        #print "LearningAgent.update(): deadline = {}, inputs = {}, action = {}, reward = {}".format(deadline, inputs, action, reward)  # [debug]
 
 
 def run():
@@ -81,7 +82,7 @@ def run():
     # NOTE: You can set enforce_deadline=False while debugging to allow longer trials
 
     # Now simulate it
-    sim = Simulator(e, update_delay=0.5, display=True)  # create simulator (uses pygame when display=True, if available)
+    sim = Simulator(e, update_delay=0.002, display=False)  # create simulator (uses pygame when display=True, if available)
     # NOTE: To speed up simulation, reduce update_delay and/or set display=False
 
     sim.run(n_trials=100)  # run for a specified number of trials

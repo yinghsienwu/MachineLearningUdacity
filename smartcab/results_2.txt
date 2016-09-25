@@ -1,0 +1,100 @@
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Arrived! Time_span= 3 / 20 total_rewards= 5.5
+Arrived! Time_span= 2 / 30 total_rewards= 8.5
+Failed!
+Failed!
+Arrived! Time_span= 13 / 35 total_rewards= -2.5
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Arrived! Time_span= 6 / 25 total_rewards= 6.0
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Arrived! Time_span= 13 / 20 total_rewards= 5.5
+Failed!
+Arrived! Time_span= 14 / 20 total_rewards= 1.5
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Arrived! Time_span= 15 / 25 total_rewards= 11.5
+Failed!
+Failed!
+Failed!
+Arrived! Time_span= 14 / 30 total_rewards= -2.5
+Failed!
+Arrived! Time_span= 21 / 55 total_rewards= 7.5
+Failed!
+Failed!
+Failed!
+Arrived! Time_span= 35 / 40 total_rewards= 4.0
+Failed!
+Failed!
+Failed!
+Failed!
+Arrived! Time_span= 12 / 35 total_rewards= 4.0
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Arrived! Time_span= 18 / 25 total_rewards= 2.0
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Arrived! Time_span= 10 / 25 total_rewards= 3.0
+Failed!
+Failed!
+Failed!
+Arrived! Time_span= 3 / 30 total_rewards= 12.5
+Failed!
+Arrived! Time_span= 7 / 25 total_rewards= 1.0
+Failed!
+Failed!
+Failed!
+Failed!
+Arrived! Time_span= 20 / 40 total_rewards= -5.5
+Failed!
+Arrived! Time_span= 20 / 30 total_rewards= 0.5
+Failed!
+Failed!
+Failed!
+Failed!
+Arrived! Time_span= 8 / 35 total_rewards= 10.0
+Arrived! Time_span= 18 / 45 total_rewards= -7.5
+Failed!
+Failed!
+Failed!
+Arrived! Time_span= 12 / 20 total_rewards= 4.0
+Failed!
+Failed!
+Failed!
+Failed!
+Failed!
+Arrived! Time_span= 39 / 40 total_rewards= -0.5
+Failed!
+Failed!

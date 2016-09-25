@@ -93,6 +93,8 @@ class Environment(object):
 
         start_heading = random.choice(self.valid_headings)
         deadline = self.compute_dist(start, destination) * 5
+        ###
+        self.deadline_start=deadline
         print "Environment.reset(): Trial set up with start = {}, destination = {}, deadline = {}".format(start, destination, deadline)
 
         # Initialize agent(s)
@@ -215,9 +217,11 @@ class Environment(object):
                 self.done = True
                 print "Environment.act(): Primary agent has reached destination!"  # [debug]
                 ###log, output test results
-                with open("results.txt","a") as log:
-                    log.write("Success! time span "+str(self.agent_states[self.primary_agent]['deadline'])+"/"+
-                              str(self.deadline_start)+" rewards "+str(self.primary_agent.total_rewards)+"\n")
+                log=open("results.txt","a")
+                log.write("Arrived! Time_span= ")
+                log.write(str(self.agent_states[self.primary_agent]['deadline'])+" / ")
+                log.write(str(self.deadline_start)+" total_rewards= ")
+                log.write(str(self.primary_agent.total_rewards)+"\n")
 
             self.status_text = "state: {}\naction: {}\nreward: {}".format(agent.get_state(), action, reward)
             #print "Environment.act() [POST]: location: {}, heading: {}, action: {}, reward: {}".format(location, heading, action, reward)  # [debug]

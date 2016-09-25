@@ -14,9 +14,9 @@ class LearningAgent(Agent):
         self.last_action=None
         ### Initialize q matrix
         self.q={}
-        self.alpha=0.5    ###optimal learning rate~1
-        self.epsilon=0.3  ###initial stoschasticity
-        self.gamma=0.8   ###discount factor: too high, may diverge
+        self.alpha=0.9    ###optimal learning rate~1
+        self.epsilon=0.1  ###initial stoschasticity
+        self.gamma=0.1   ###discount factor: too high, may diverge
         self.last_state=None
         self.state=None
         self.last_reward=None
@@ -111,7 +111,7 @@ def run():
     # NOTE: You can set enforce_deadline=False while debugging to allow longer trials
 
     # Now simulate it
-    sim = Simulator(e, update_delay=0.05, display=True)  # create simulator (uses pygame when display=True, if available)
+    sim = Simulator(e, update_delay=0.002, display=False)  # create simulator (uses pygame when display=True, if available)
     # NOTE: To speed up simulation, reduce update_delay and/or set display=False
 
     sim.run(n_trials=100)  # run for a specified number of trials
