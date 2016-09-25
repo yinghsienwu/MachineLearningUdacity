@@ -14,9 +14,9 @@ class LearningAgent(Agent):
         self.last_action=None
         ### Initialize q matrix
         self.q={}
-        self.alpha=0.5    ###optimal learning rate
+        self.alpha=0.5    ###optimal learning rate~1
         self.epsilon=0.3  ###initial stoschasticity
-        self.gamma=0.2   ###discount factor: too high, may diverge
+        self.gamma=0.8   ###discount factor: too high, may diverge
         self.last_state=None
         self.state=None
         self.last_reward=None
