@@ -14,9 +14,9 @@ class LearningAgent(Agent):
         self.last_action=None
         ### Initialize q matrix
         self.q={}
-        self.alpha=0.7    ###optimal learning rate~1
+        self.alpha=0.1    ###optimal learning rate~1
         self.epsilon=0.3  ###initial stoschasticity
-        self.gamma=0.1   ###discount factor: too high, may diverge
+        self.gamma=0.8   ###discount factor: too high, may diverge
         self.last_state=None
         self.state=None
         self.last_reward=None
@@ -28,8 +28,7 @@ class LearningAgent(Agent):
         self.last_action=None
         self.state=None
         ###q-learning
-        self.epsilon=0. ### epsilon will always stay at 0. (except for the first iteration) the agent never explores. 
-        ### do consider implementing an epsilon decay here where epsilon decreases as time progresses so the agent explores less and explore more as time progresses
+        self.epsilon=0.
         self.total_rewards=0
 
     def update(self, t):
@@ -112,7 +111,7 @@ def run():
     # NOTE: You can set enforce_deadline=False while debugging to allow longer trials
 
     # Now simulate it
-    sim = Simulator(e, update_delay=0.5, display=True)  # create simulator (uses pygame when display=True, if available)
+    sim = Simulator(e, update_delay=0.002, display=False)  # create simulator (uses pygame when display=True, if available)
     # NOTE: To speed up simulation, reduce update_delay and/or set display=False
 
     sim.run(n_trials=100)  # run for a specified number of trials
