@@ -2,6 +2,7 @@ import random
 from environment import Agent, Environment
 from planner import RoutePlanner
 from simulator import Simulator
+import numpy as np
 
 class LearningAgent(Agent):
     """An agent that learns to drive in the smartcab world."""
@@ -28,8 +29,7 @@ class LearningAgent(Agent):
         self.last_action=None
         self.state=None
         ###q-learning
-        self.epsilon=0. ### epsilon will always stay at 0. (except for the first iteration) the agent never explores. 
-        ### do consider implementing an epsilon decay here where epsilon decreases as time progresses so the agent explores less and explore more as time progresses
+        self.epsilon=0.
         self.total_rewards=0
 
     def update(self, t):
@@ -37,7 +37,7 @@ class LearningAgent(Agent):
         self.next_waypoint = self.planner.next_waypoint()  # from route planner, also displayed by simulator
         
         # TODO: Update state  
-        self.state=(self.env.sense(self)['light'],self.planner.next_waypoint())  ###tuple (traffic_light,next_waypoint)
+        self.state=(self.env.sense(self)['light'],self.planner.next_waypoint(),self.env.sense(self)['oncoming'],self.env.sense(self)['left'])  ###tuple (traffic_light,next_waypoint,oncoming,left)
 
         # TODO: Select action according to your policy
         action=self.getAction(self.state)
@@ -69,6 +69,10 @@ class LearningAgent(Agent):
     def getBestAction(self,state):
         ### return the best possible action    
         legalActions=[None,'forward','left','right']
+        Qmatrix=[self.get_q(state,action) for action in legalActions]
+        bestAction=legalActions[np.argmax(Qmatrix)]
+        #best_q=np.amax(Qmatrix)
+        '''
         bestAction=None
         best_q=-999999
         for action in legalActions:
@@ -79,6 +83,7 @@ class LearningAgent(Agent):
                 if random.random()<0.5:
                     best_q=self.get_q(state,action)
                     bestAction=action
+        '''
         return bestAction
             
     def get_q(self,state,action):

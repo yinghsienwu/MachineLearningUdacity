@@ -31,7 +31,7 @@ class Environment(object):
     valid_headings = [(1, 0), (0, -1), (-1, 0), (0, 1)]  # ENWS
     hard_time_limit = -100  # even if enforce_deadline is False, end trial when deadline reaches this value (to avoid deadlocks)
 
-    def __init__(self, num_dummies=3):
+    def __init__(self, num_dummies=16):
         self.num_dummies = num_dummies  # no. of dummy agents
         
         # Initialize simulation variables
@@ -218,9 +218,9 @@ class Environment(object):
                 print "Environment.act(): Primary agent has reached destination!"  # [debug]
                 ###log, output test results
                 log=open("results.txt","a")
-                log.write("Arrived! Time span= ")
-                log.write(str(self.agent_states[self.primary_agent]['deadline'])+"/")
-                log.write(str(self.deadline_start)+"total rewards= ")
+                log.write("Arrived! Time_span= ")
+                log.write(str(self.agent_states[self.primary_agent]['deadline'])+" / ")
+                log.write(str(self.deadline_start)+" total_rewards= ")
                 log.write(str(self.primary_agent.total_rewards)+"\n")
 
             self.status_text = "state: {}\naction: {}\nreward: {}".format(agent.get_state(), action, reward)
