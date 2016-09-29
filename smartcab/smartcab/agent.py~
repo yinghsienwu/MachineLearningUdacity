@@ -2,6 +2,7 @@ import random
 from environment import Agent, Environment
 from planner import RoutePlanner
 from simulator import Simulator
+import numpy as np
 
 class LearningAgent(Agent):
     """An agent that learns to drive in the smartcab world."""
@@ -68,6 +69,10 @@ class LearningAgent(Agent):
     def getBestAction(self,state):
         ### return the best possible action    
         legalActions=[None,'forward','left','right']
+        Qmatrix=[self.get_q(state,action) for action in legalActions]
+        bestAction=legalActions[np.argmax(Qmatrix)]
+        #best_q=np.amax(Qmatrix)
+        '''
         bestAction=None
         best_q=-999999
         for action in legalActions:
@@ -78,6 +83,7 @@ class LearningAgent(Agent):
                 if random.random()<0.5:
                     best_q=self.get_q(state,action)
                     bestAction=action
+        '''
         return bestAction
             
     def get_q(self,state,action):
@@ -88,8 +94,11 @@ class LearningAgent(Agent):
         ###q-value update
         if (state,action) not in self.q:
             self.q[(state,action)]=100.
-        else:
+        else:  ### q-learning algorithm
             self.q[(state,action)]=self.q[(state,action)]+self.alpha*(reward+self.gamma*self.get_qmax(next_state)-self.q[(state,action)])
+            '''the Bellman equation (for future reference)
+            self.q[(state,action)]=(1.0-self.alpha)*self.q[(state,action)]+self.alpha*(reward+self.gamma*max(self.q[(next_state,next_action)] for next_action in self.actions))    ###if I know what are self.actions
+            '''
 
     def get_qmax(self,state):
         ### return max_action Q(state,action) 

@@ -94,8 +94,11 @@ class LearningAgent(Agent):
         ###q-value update
         if (state,action) not in self.q:
             self.q[(state,action)]=100.
-        else:
+        else:  ### q-learning algorithm
             self.q[(state,action)]=self.q[(state,action)]+self.alpha*(reward+self.gamma*self.get_qmax(next_state)-self.q[(state,action)])
+            '''the Bellman equation (for future reference)
+            self.q[(state,action)]=(1.0-self.alpha)*self.q[(state,action)]+self.alpha*(reward+self.gamma*max(self.q[(next_state,next_action)] for next_action in self.actions))    ###if I know what are self.actions
+            '''
 
     def get_qmax(self,state):
         ### return max_action Q(state,action) 
@@ -104,8 +107,13 @@ class LearningAgent(Agent):
         for action in legalActions:
             if self.get_q(state,action)>best_q:
                 best_q=self.get_q(state,action)
-
         return best_q
+
+    def get_decay_rate(t): ### Decay rate for epsilon
+        ###http://stackoverflow.com/questions/22805872/optimal-epsilon-ϵ-greedy-value 
+        ### reduce te chances of random exploration over time, as we can get the best of both exploration vs. exploitation
+        return 1.0/float(t)
+
 
 def run():
     """Run the agent for a finite number of trials."""
